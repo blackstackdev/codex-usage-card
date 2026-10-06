@@ -1,0 +1,20 @@
+{
+  "name": "kreadiv-usage-card",
+  "interface": {
+    "displayName": "Krēˈādiv Worx Usage Card"
+  },
+  "plugins": [
+    {
+      "name": "codex-usage-card",
+      "source": {
+        "source": "local",
+        "path": "./plugins/codex-usage-card"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
