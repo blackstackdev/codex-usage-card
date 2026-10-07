@@ -17,4 +17,3 @@ If python = "" Or Not files.FileExists(python) Then
 End If
 cmd = Chr(34) & python & Chr(34) & " " & Chr(34) & files.BuildPath(folder, "cosmic.py") & Chr(34)
 shell.Run cmd, 1, False
-
