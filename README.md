@@ -1,39 +1,50 @@
 # Usage Card for Codex
 
-A little room for your limits. A compact Windows desktop card by **Krēˈādiv Worx**, with a local Codex skill plugin. MIT open source. Version 0.3.0, 6 October 2026 — public beta.
+A little space for your limits. A resizable Windows desktop card by **Krēˈādiv Worx**, with a local Codex skill plugin. MIT open source. Version **0.4.0**, 7 October 2026 — public beta.
 
-Rounded dark card, teal progress bars, remaining percentages and reset countdowns. Drag it into place, pin it above your work, or refresh on demand. The card refreshes every five minutes and shows only the plan windows your account exposes. A failed refresh keeps the previous reading visibly stale.
+Cosmic blue planet artwork, a large remaining percentage, local reset dates and a blue progress line. Drag it into place, resize it, pin it or refresh on demand. Shows only plan windows returned by Codex; failed refreshes keep the previous reading marked Stale. Percentages describe plan capacity, not monetary credits.
 
-## Desktop download
+![Cosmic desktop card with remaining percentage, local reset and resize corner](docs/screenshots/cosmic-v0.4.0.png)
 
-Download **Usage-Card-for-Codex-v0.3.0-windows.zip** from the [release page](https://github.com/blackstackdev/codex-usage-card/releases/tag/v0.3.0), extract it, then double-click **Launch Widget.vbs**. If Windows blocks script launching, run `python widget.py` from that folder.
+## Download and run
 
-Requires Windows, **Python 3.11+ with Tcl/Tk**, `pythonw.exe` on PATH for the double-click launcher, and a locally signed-in **Codex CLI executable**. The Codex desktop app's bundled `codex.exe` is detected automatically; a `codex.exe` on PATH also works. npm `.cmd` shims are not currently supported. No third-party Python packages are needed. This is a script download, not a bundled executable or installer.
+Download **Usage-Card-for-Codex-v0.4.0-windows.zip** from the [release page](https://github.com/blackstackdev/codex-usage-card/releases/tag/v0.4.0), extract it, then double-click **Launch Widget.vbs**. Alternatively run `python widget.py` from that folder.
 
-**Close** or Escape exits. **Pin** keeps it above other windows. **Menu** includes exact reset dates and About. Drag the header or background to move it. There is no conventional taskbar/minimize entry; relaunch with the same file. One instance runs per Windows session.
+Requires Windows, **Python 3.11+ with Tcl/Tk**, `pythonw.exe` on PATH for the launcher, and a signed-in **Codex CLI executable**. The installed desktop app's Codex executable is detected automatically; a `codex.exe` on PATH also works. npm `.cmd` shims are unsupported. No third-party Python packages are needed. This is a script package, not a bundled executable or installer.
 
-## Codex plugin
+## Controls and startup
 
-The plugin supplies a local skill for **“Show my Codex plan limits”** and **“Open my Codex usage card.”** It executes the bundled Python helper on your computer. It has no MCP server or cloud service.
+- Drag the header/background to move; drag the **lower-right corner** to resize from 360×240 to 960×640. Artwork, text and controls scale proportionally. Width is saved.
+- **Menu → Size** offers Small, Default and Large. Ctrl+= enlarges; Ctrl+- shrinks.
+- **Pin** / Ctrl+P keeps it above windows. **Refresh** / Ctrl+R reads current limits. Automatic refresh is five minutes. **Menu** / Ctrl+M includes reset details and About. **×** / Escape closes.
+- There is no conventional taskbar/minimize entry. One Cosmic instance runs per Windows session.
 
-Using Codex CLI 0.160.1 or another version with `plugin marketplace` support:
+**Startup is off by default.** Enable **Menu → Launch at Windows sign-in** to open the card after logging into this Windows account. It copies the app to a stable local app-data folder (`kreadiv-worx\CodexUsageCosmic\app`) and creates a dedicated `Kreadiv Worx Cosmic Usage.vbs` entry in your Startup folder. Turning the option off removes only this marked entry; the installed copy stays available. No administrator rights or scheduled task are needed.
+
+To update a startup-enabled copy: close the running card, extract the new package, run `python cosmic.py --enable-startup` there and relaunch. To disable from the terminal, use `python cosmic.py --disable-startup`.
+
+The older v0.3.0 compact card and its preferences are preserved. Cosmic uses separate preferences and a separate instance guard; close the older card if you only want one on your desktop.
+
+## Local Codex plugin
+
+The plugin supplies **“Show my Codex plan limits”** and **“Open my Codex usage card.”** Its helper runs locally; no MCP server or cloud backend is included. Neither helper action enables startup.
+
+Using Codex CLI 0.160.1 or another version supporting `plugin marketplace`:
 
 ```powershell
-codex plugin marketplace add blackstackdev/codex-usage-card --ref v0.3.0
+codex plugin marketplace add blackstackdev/codex-usage-card --ref v0.4.0
 codex plugin add codex-usage-card@kreadiv-usage-card
 ```
 
-Open a new Codex chat and select **Usage Card for Codex** from the plugins picker, then ask for either workflow. If the installed CLI is not on PATH, use the full path to your `codex.exe` for these commands.
-
-The **codex-usage-card-v0.3.0-plugin.zip** asset also contains the self-contained plugin for hosts accepting local plugin packages. GitHub marketplace installation uses this repository's `.agents/plugins/marketplace.json`.
+Use the full Codex executable path if it is not on PATH. Open a new Codex chat and select Usage Card for Codex in the plugin picker. The **codex-usage-card-v0.4.0-plugin.zip** asset is also self-contained for hosts accepting local packages. GitHub marketplace installation uses `.agents/plugins/marketplace.json`. A previously installed marketplace pinned to v0.3.0 needs its ref updated and plugin reloaded through the host's supported flow.
 
 ## Data and limitations
 
-The card starts a short-lived installed Codex app-server, reads `account/rateLimits/read`, then closes it. Codex handles the existing sign-in and server request. The card does not read authentication files or run a model turn. Only position and pin settings are saved at `%LOCALAPPDATA%\kreadiv-worx\CodexUsageWidget\settings.json`. No startup tasks, new account connections or credit resets are created. [Privacy details](PRIVACY.md).
+The card launches the installed Codex app-server, reads `account/rateLimits/read`, then closes it. Codex handles the existing sign-in and server request. The card does not read auth files, run model turns, connect a new account or redeem reset credits. Position, pin and width are saved in the local `CodexUsageCosmic\settings.json`; installed copies anchor preferences next to their app folder. [Privacy details](PRIVACY.md).
 
-Limits are server snapshots shared across the account. The CLI account may differ from the desktop account after switching accounts. The app-server protocol is experimental and may change. Windows desktop only; subtle translucency, without a blurred backdrop. Independent of OpenAI.
+Shared account limits are snapshots. The CLI account can differ from the desktop account after an account switch. The protocol is experimental. Windows desktop only; generated artwork without a blurred desktop backdrop. Independent of OpenAI.
 
-Tested on one Windows PC with Python 3.11.9 / Tk 8.6 / Codex CLI 0.160.1, including execution from an extracted folder with spaces. Automated checks cover data, protocol, error handling and native Tk construction. Other DPI/monitor arrangements, screen readers, sleep/resume and long unattended use remain unverified. See [verification](docs/VERIFICATION.md) for the exact evidence and plugin-host verification scope.
+Tested on one Windows PC with Python 3.11.9 / Tk 8.6 / Codex CLI 0.160.1. Native pointer/keyboard checks exercised resize and saved-size reload. The actual startup entry was executed and duplicate launch checked. Full reboot/sign-out, other DPI/monitors, screen readers, sleep/resume and long unattended use remain unverified. [Verification details](docs/VERIFICATION.md).
 
 ## Development
 
@@ -42,6 +53,7 @@ python -m unittest discover -s plugins/codex-usage-card/app/tests -v
 python -m unittest discover -s tests -v
 python plugins/codex-usage-card/app/widget.py --smoke
 python plugins/codex-usage-card/scripts/usage.py status
+python scripts/package.py
 ```
 
-Report problems in [GitHub Issues](https://github.com/blackstackdev/codex-usage-card/issues). Remove personal details before sharing logs. [Changelog](CHANGELOG.md) · [MIT license](LICENSE).
+Report issues in [GitHub Issues](https://github.com/blackstackdev/codex-usage-card/issues), without personal data. [Changelog](CHANGELOG.md) · [MIT license](LICENSE) · [Artwork provenance](docs/ARTWORK.md).

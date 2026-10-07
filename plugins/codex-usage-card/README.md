@@ -1,9 +1,9 @@
 # Usage Card for Codex
 
-Local Codex skills plugin, version 0.3.0. Python 3.11+ with Tk and a signed-in Codex CLI executable are required. Windows desktop only.
+Local skills plugin, version 0.4.0. Windows, Python 3.11+ with Tk and a signed-in Codex CLI executable required.
 
-Run `python scripts/usage.py status` to read limits or `python scripts/usage.py open` to request the desktop card. Double-click `app/Launch Widget.vbs` as an alternative.
+`python scripts/usage.py status` reads sanitized plan limits. `python scripts/usage.py open` requests the resizable Cosmic card. Neither action enables startup. Menu → Launch at Windows sign-in is explicitly opt-in and reversible.
 
-Only window position and pin settings are persisted. No authentication files are read. The installed CLI handles its existing sign-in and server request. The app-server protocol is experimental. Independent of OpenAI.
+Only position, width and pin are saved. The installed CLI handles existing sign-in; auth files are not read. Experimental protocol. Independent of OpenAI.
 
-Documentation: https://github.com/blackstackdev/codex-usage-card
+Instructions, privacy and support: https://github.com/blackstackdev/codex-usage-card

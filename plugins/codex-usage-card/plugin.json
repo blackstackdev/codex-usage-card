@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-usage-card",
-  "version": "0.3.0",
-  "description": "A compact Windows desktop usage card and local Codex skill for remaining plan limits.",
+  "version": "0.4.0",
+  "description": "A resizable Windows desktop usage card and local Codex skill for remaining plan limits.",
   "author": {
     "name": "Krēˈādiv Worx"
   },
@@ -12,7 +12,7 @@
       "interface": {
         "displayName": "Usage Card for Codex",
         "shortDescription": "Your limits, at a glance",
-        "longDescription": "Read your remaining Codex plan limits and reset times, or open a compact Windows desktop card with automatic refresh. Uses the installed, signed-in Codex CLI. Requires Python 3.11+ with Tk. Local skills plugin; no hosted service.",
+        "longDescription": "Read your remaining Codex plan limits and reset times, or open a resizable Cosmic desktop card with automatic refresh and opt-in Windows startup. Uses the installed, signed-in Codex CLI. Requires Python 3.11+ with Tk. Local skills plugin; no hosted service.",
         "developerName": "Krēˈādiv Worx",
         "category": "Productivity",
         "defaultPrompt": [
